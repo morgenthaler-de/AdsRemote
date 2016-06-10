@@ -65,9 +65,7 @@ namespace Ads.Remote
             try
             {
                 if (NotifyHandle > -1)
-                {
                     Device.AdsClient.DeleteDeviceNotification(NotifyHandle);
-                }
             }
             catch
             {
@@ -82,7 +80,6 @@ namespace Ads.Remote
             try
             {
                 if (IndexGroup == -1 && IndexOffset == -1)
-                {
                     try
                     {
                         ITcAdsSymbol sym = Device.AdsClient.ReadSymbolInfo(RemoteName);
@@ -90,10 +87,8 @@ namespace Ads.Remote
                         IndexOffset = sym.IndexOffset;
                     }
                     catch { }
-                }
 
                 if (IndexGroup > -1 && IndexOffset > -1)
-                {
                     NotifyHandle =
                         Device.AdsClient.AddDeviceNotificationEx(
                             IndexGroup, IndexOffset,
@@ -101,9 +96,7 @@ namespace Ads.Remote
                             this,
                             typeof(T)
                             );
-                }
                 else
-                {
                     NotifyHandle =
                         Device.AdsClient.AddDeviceNotificationEx(
                             RemoteName,
@@ -111,7 +104,6 @@ namespace Ads.Remote
                             this,
                             typeof(T)
                             );
-                }
             }
             catch
             {
@@ -142,5 +134,5 @@ namespace Ads.Remote
         }
 
         public override Type ValueType { get { return typeof(T); } }
-    }
+    } // class
 }

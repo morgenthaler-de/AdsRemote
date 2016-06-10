@@ -220,10 +220,8 @@ namespace Ads.Remote
             // TCat type
             byte[] tcatType = rr.NextChunk(Segment.TCATTYPE_RUNTIME.Length);
             if (tcatType[0] == Segment.TCATTYPE_RUNTIME[0])
-            {
                 if (tcatType[2] == Segment.TCATTYPE_RUNTIME[2])
                     device.IsRuntime = true;
-            }
 
             // OS version
             byte[] osVer = rr.NextChunk(Segment.L_OSVERSION);
@@ -239,7 +237,6 @@ namespace Ads.Remote
 
             int ci = tail.Length - 4;
             for (int i = ci; i > 0; i -= 4)
-            {
                 if (tail[i + 0] == 3 &&
                     tail[i + 2] == 4)
                 {
@@ -250,7 +247,6 @@ namespace Ads.Remote
                     device.TcVersion.Build = tail[i + 6] + tail[i + 7] * 256;
                     break;
                 }
-            }
 
             // Comment
             byte[] descMarker = rr.NextChunk(Segment.L_DESCRIPTIONMARKER);
@@ -259,7 +255,6 @@ namespace Ads.Remote
             if (descMarker[0] == 2)
             {
                 if (isUnicode)
-                {
                     for (int i = 0; i < c; i += 2)
                     {
                         if (rr.Buffer[rr.Shift + i] == 0 &&
@@ -267,32 +262,29 @@ namespace Ads.Remote
                             break;
                         len += 2;
                     }
-                }
                 else
-                {
                     for (int i = 0; i < c; i++)
                     {
                         if (rr.Buffer[rr.Shift + i] == 0)
                             break;
                         len++;
                     }
-                }
 
                 if (len > 0)
                 {
                     byte[] description = rr.NextChunk(len);
 
-                    if (isUnicode)
+                    if (!isUnicode)
+                        device.Comment = ASCIIEncoding.Default.GetString(description);
+                    else
                     {
                         byte[] asciiBytes = Encoding.Convert(Encoding.Unicode, Encoding.ASCII, description);
                         char[] asciiChars = new char[Encoding.ASCII.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
                         Encoding.ASCII.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
                         device.Comment = new string(asciiChars);
                     }
-                    else
-                        device.Comment = ASCIIEncoding.Default.GetString(description);
                 }
-            }
+            } // if (descMarker[0] == 2)
 
             return device;
         }

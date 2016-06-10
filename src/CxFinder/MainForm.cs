@@ -33,7 +33,7 @@ namespace CxFinder
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.Text = APP_NAME + AppShortVersion;
+            Text = APP_NAME + AppShortVersion;
 
             FormNiCombo();
             statusStatusLabel.Text = STATUS_READY;
@@ -99,23 +99,28 @@ namespace CxFinder
             niComboBox.Enabled = ethCheckBox.Enabled = wlanCheckBox.Enabled = lbCheckBox.Enabled = false;
 
             ComboBoxItem si = (ComboBoxItem)niComboBox.SelectedItem;            
-            List<RemotePlcInfo> di = await AmsRouter.BroadcastSearchAsync((IPAddress)si.Value, timeout * 1000);
+            List<RemotePlcInfo> di =
+                await AmsRouter.BroadcastSearchAsync(
+                    (IPAddress)si.Value,
+                    timeout * 1000);
 
             cxListView.Items.Clear();
             foreach(RemotePlcInfo info in di)
             {
-                ListViewItem lvi = new ListViewItem( new string[]
-                    {
-                        info.Name,
-                        info.Address.ToString(),
-                        info.AmsNetId.ToString(),
-                        string.Concat(
-                            info.TcVersion.Version.ToString(), ".",
-                            info.TcVersion.Revision.ToString(), ".",
-                            info.TcVersion.Build.ToString()),
-                        info.OsVersion,
-                        info.Comment
-                    });
+                ListViewItem lvi =
+                    new ListViewItem(
+                        new string[]
+                        {
+                            info.Name,
+                            info.Address.ToString(),
+                            info.AmsNetId.ToString(),
+                            string.Concat(
+                                info.TcVersion.Version.ToString(), ".",
+                                info.TcVersion.Revision.ToString(), ".",
+                                info.TcVersion.Build.ToString()),
+                            info.OsVersion,
+                            info.Comment
+                        });
 
                 cxListView.Items.Add(lvi);
             }
@@ -133,13 +138,9 @@ namespace CxFinder
         private void searchProgressTimer_Tick(object sender, EventArgs e)
         {
             if (searchStatusProgressBar.Value + 1 <= searchStatusProgressBar.Maximum)
-            {
                 searchStatusProgressBar.Value++;
-            }
             else
-            {
                 searchStatusProgressBar.Value = searchStatusProgressBar.Maximum;
-            }
         }
     }
 }

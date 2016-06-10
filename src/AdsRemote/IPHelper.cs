@@ -13,9 +13,7 @@ namespace Ads.Remote
             IPAddress hostMask = GetHostMask(localhost);
 
             if (hostMask == null || localhost == null)
-            {
                 return null;
-            }
 
             byte[] complementedMaskBytes = new byte[4];
             byte[] broadcastIpBytes = new byte[4];
@@ -48,12 +46,8 @@ namespace Ads.Remote
                 UnicastIPAddressInformationCollection unicastInfos = netInterface.GetIPProperties().UnicastAddresses;
 
                 foreach (UnicastIPAddressInformation info in unicastInfos)
-                {
                     if (info.Address.ToString() == strLocalAddress)
-                    {
                         return info.IPv4Mask;
-                    }
-                }
             }
 
             return null;
@@ -70,31 +64,22 @@ namespace Ads.Remote
         public static List<IPAddress> FilteredLocalhosts(List<NetworkInterfaceType> niTypes = null)
         {
             if (niTypes == null)
-            {
-                niTypes = new List<NetworkInterfaceType>
-                {
-                    NetworkInterfaceType.Wireless80211,
-                    NetworkInterfaceType.Ethernet
-                };
-            }
+                niTypes =
+                    new List<NetworkInterfaceType>
+                    {
+                        NetworkInterfaceType.Wireless80211,
+                        NetworkInterfaceType.Ethernet
+                    };
 
             List<IPAddress> localhosts = new List<IPAddress>();
 
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
-            {
                 if (niTypes.Contains(ni.NetworkInterfaceType))
-                {
                     foreach (UnicastIPAddressInformation unicastInfo in ni.GetIPProperties().UnicastAddresses)
-                    {
                         if (unicastInfo.Address.AddressFamily == AddressFamily.InterNetwork)
-                        {
                             localhosts.Add(unicastInfo.Address);
-                        }
-                    }
-                }
-            }
 
             return localhosts;
         }
-    }
+    } // class
 }

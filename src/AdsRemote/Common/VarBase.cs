@@ -38,9 +38,7 @@ namespace Ads.Remote.Common
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 TryUnsubscribe();
-            }
         }
     }
 }
