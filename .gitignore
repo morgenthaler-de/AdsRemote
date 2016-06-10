@@ -1,12 +1,7 @@
 ﻿###
 
-/src/AdsRemote/obj
-/src/CxFinder/obj
-/bin/Debug
-/bin/Release/*.xml
-/bin/Release/TwinCAT.Ads.dll
-/bin/Release/*.pdb
-/bin/Release/*.exe
+[Oo]bj/
+[Bb]in/
 /lib/*.xml
 
 .vs
