@@ -1,4 +1,4 @@
-A .NET wrapper around Beckhoff's TwinCAT.Ads API library. Project is not affiliated with Beckhoff.
+High-level interface for Beckhoff's TwinCAT.Ads API library. Project is not affiliated with Beckhoff.
 
 Getting started
 ===============
