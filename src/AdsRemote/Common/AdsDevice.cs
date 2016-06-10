@@ -21,7 +21,7 @@ namespace Ads.Remote.Common
 
         internal void SetActive(bool isActive)
         {
-            this.isReady = isActive;
+            isReady = isActive;
         }
     }
 }

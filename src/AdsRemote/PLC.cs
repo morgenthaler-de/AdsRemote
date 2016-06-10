@@ -120,9 +120,7 @@ namespace Ads.Remote
                 lock (_locker_dict_PortDevice)
                 {
                     if (devices.Count != dict_PortDevice.Values.Count)
-                    {
                         devices = new List<AdsDevice>(dict_PortDevice.Values);
-                    }
                 }
 
                 foreach (AdsDevice device in devices)
@@ -137,13 +135,10 @@ namespace Ads.Remote
                         {
                             Var v = device.Vars[0];
                             if(v.IndexGroup > -1 && v.IndexOffset > -1)
-                            {
                                 device.AdsClient.ReadAny(v.IndexGroup, v.IndexOffset, v.ValueType);
-                            }
                             else
-                            {
                                 device.AdsClient.ReadSymbol(v.Name, v.ValueType, !device.Ready);
-                            }
+
                             isActive = true;
                         }
                         catch { }
@@ -157,9 +152,7 @@ namespace Ads.Remote
                 } // foreach (AdsDevice device in devices)
 
                 if (!token.IsCancellationRequested)
-                {
                     Thread.Sleep(updateList.Count > 0 ? Tune_ReinitInterval : Tune_PingSleepInterval);
-                }
 
                 foreach(AdsDevice device in updateList)
                 {
@@ -208,9 +201,7 @@ namespace Ads.Remote
             AdsDevice device = (AdsDevice)obj_Device;
 
             foreach (Var v in device.Vars)
-            {
                 v.TryUnsubscribe();
-            }
 
             EventHandler<AdsDevice> handle = DeviceLost;
             handle?.Invoke(this, device);
@@ -242,9 +233,7 @@ namespace Ads.Remote
         {
             Var v;
             if (dict_NameVar.TryGetValue(varName, out v))
-            {
                 return (Var<T>)v;
-            }
 
             Var<T> var;
             AdsDevice device;
@@ -273,9 +262,7 @@ namespace Ads.Remote
             dict_NameVar.Add(varName, var);
 
             if (device.Ready)
-            {
                 var.TrySubscribe();
-            }
 
             return var;
         }
@@ -307,9 +294,7 @@ namespace Ads.Remote
 
         public T Class<T>(T instance = default(T)) where T : new()
         {
-            T o = instance;
-            if (o == null)
-                o = new T();
+            T o = instance == null ? new T() : instance;
 
             #region Properties
             PropertyInfo[] properties = o.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
@@ -321,13 +306,9 @@ namespace Ads.Remote
                     Type t = null;
 
                     if (pr.PropertyType.IsGenericType)
-                    {
                         t = pr.PropertyType.GetGenericArguments()[0];
-                    }
                     else
-                    {
                         t = la.As;
-                    }
 
                     if (t != null)
                     {
@@ -345,8 +326,8 @@ namespace Ads.Remote
 
                         if (v != null)
                             pr.SetValue(o, v);
-                    }
-                }
+                    } // if (t != null)
+                } // if (la != null)
             } //foreach(PropertyInfo pr in properties)
             #endregion
 
@@ -360,13 +341,9 @@ namespace Ads.Remote
                     Type t = null;
 
                     if (fi.FieldType.IsGenericType)
-                    {
                         t = fi.FieldType.GetGenericArguments()[0];
-                    }
                     else
-                    {
                         t = la.As;
-                    }
 
                     if (t != null)
                     {
@@ -404,14 +381,10 @@ namespace Ads.Remote
             if (disposing)
             {
                 foreach (Var v in dict_NameVar.Values)
-                {
                     v.TryUnsubscribe();
-                }
 
                 if (cancelTokenSource != null)
-                {
                     cancelTokenSource.Cancel();
-                }
             }
         }
     }
