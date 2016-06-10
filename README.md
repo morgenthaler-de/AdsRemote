@@ -15,7 +15,7 @@ With help of Ads.Remote.PLC.Router you can add new route record into the remote 
 
 Installation
 ------------
-TwinCAT 2 or 3 must be installed.
+TwinCAT 2 or 3 have to be installed.
 
 Examples
 ===============
@@ -47,11 +47,12 @@ private void Plc_DeviceReady(object sender, AdsDevice e)
 Create a copy of your PLC's variable then use it like an ordinary variable
 
 ```C#
-Var<short> main_count = plc.Var<short>("MAIN.count");
-Var<ushort> main_state = plc.Var<ushort>("MAIN.state");
-Var<ushort> frm0 = plc.Var<ushort>("Inputs.Frm0InputToggle", 27907);
-Var<ushort> devState = plc.Var<ushort>(0xF030, 0x5FE, 27907);
-Var<short> g_Version = plc.Var<ushort>(".VERSION");
+Var<short>	main_count	= plc.Var<short> ("MAIN.count");
+Var<ushort>	main_state	= plc.Var<ushort>("MAIN.state");
+Var<short>	g_Version	= plc.Var<ushort>(".VERSION");
+
+Var<ushort>	frm0		= plc.Var<ushort>("Inputs.Frm0InputToggle", 27907);
+Var<ushort>	devState	= plc.Var<ushort>(0xF030, 0x5FE, 27907);
 
 long framesTotal += frm0 / 2; // automatic type casting
 MessageBox.Show(frm0);	// cast into the string type without call of the ToString()

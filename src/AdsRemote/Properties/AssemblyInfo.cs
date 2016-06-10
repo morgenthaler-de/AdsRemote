@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 [assembly: AssemblyTitle("AdsRemote")]
-[assembly: AssemblyDescription("Automation interface for TwinCAT.Ads API")]
+[assembly: AssemblyDescription("High-level interface for TwinCAT.Ads API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nikolai Voronin")]
 [assembly: AssemblyProduct("AdsRemote")]
