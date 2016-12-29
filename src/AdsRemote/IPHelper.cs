@@ -53,13 +53,7 @@ namespace Ads.Remote
             return null;
         }
 
-        public static List<IPAddress> Localhosts
-        {
-            get
-            {
-                return FilteredLocalhosts(null);
-            }
-        }
+        public static List<IPAddress> Localhosts { get { return FilteredLocalhosts(null); }}
 
         public static List<IPAddress> FilteredLocalhosts(List<NetworkInterfaceType> niTypes = null)
         {
@@ -80,6 +74,6 @@ namespace Ads.Remote
                             localhosts.Add(unicastInfo.Address);
 
             return localhosts;
-        }
+        } // FilteredLocalhosts(...)
     } // class
 }

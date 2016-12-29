@@ -65,6 +65,7 @@ namespace Ads.Remote
         public int Tune_AdsClientTimeout
         {
             get { return tune_AdsClientTimeout; }
+
             set
             {
                 tune_AdsClientTimeout = value;
@@ -73,16 +74,12 @@ namespace Ads.Remote
                 lock (_locker_dict_PortDevice)
                 {
                     if (devices.Count != dict_PortDevice.Values.Count)
-                    {
                         devices = new List<AdsDevice>(dict_PortDevice.Values);
-                    }
                 }
 
                 foreach (AdsDevice device in devices)
-                {
                     device.AdsClient.Timeout = tune_AdsClientTimeout;
-                }
-            }
+            } // set
         }
 
         #region ctor
@@ -145,7 +142,7 @@ namespace Ads.Remote
 
                         if (isActive && (!device.Ready) || (!isActive) && device.Ready)
                             updateList.Add(device);
-                    }
+                    } // foreach
 
                     if (token.IsCancellationRequested)
                         break;
@@ -162,6 +159,7 @@ namespace Ads.Remote
                     if (!device.Ready)
                     {
                         device.SetActive(true);
+
                         if (uiContext != null)
                             uiContext.Send(OnDeviceReady, device);
                         else
@@ -170,6 +168,7 @@ namespace Ads.Remote
                     else
                     {
                         device.SetActive(false);
+
                         if (uiContext != null)
                             uiContext.Send(OnDeviceLost, device);
                         else
@@ -178,12 +177,12 @@ namespace Ads.Remote
 
                     if (token.IsCancellationRequested)
                         break;
-                }
+                } // foreach
 
                 if (!token.IsCancellationRequested)
                     updateList.Clear();
             } // while(true)
-        } // private void PingThreadMethod(...
+        } // PingThreadMethod(...
 
         #region Events
         public event EventHandler<AdsDevice> DeviceReady;
@@ -229,13 +228,8 @@ namespace Ads.Remote
         #endregion
 
         #region PLC Variables and Class
-        private Var<T> CreateVariable<T>(string varName, int Port, long IGrp = -1, long IOffs = -1)
+        private AdsDevice GetDevice(int Port)
         {
-            Var v;
-            if (dict_NameVar.TryGetValue(varName, out v))
-                return (Var<T>)v;
-
-            Var<T> var;
             AdsDevice device;
 
             if (!dict_PortDevice.TryGetValue(Port, out device))
@@ -248,21 +242,41 @@ namespace Ads.Remote
                     dict_PortDevice.Add(Port, device);
             }
 
-            if (IGrp > -1 && IOffs > -1)
-            {
-                var = new Var<T>(IGrp, IOffs, device);
-                device.Vars.Add(var);
-            }
-            else
-            {
-                var = new Var<T>(varName, device);
-                device.Vars.Add(var);
-            }
+            return device;
+        }
 
+        private Var<T> CreateVariable<T>(string varName, int Port)
+        {
+            Var v;
+            if (dict_NameVar.TryGetValue(varName, out v))
+                return (Var<T>)v;
+
+            AdsDevice device = GetDevice(Port);
+
+            Var<T> var = new Var<T>(varName, device);
+            device.Vars.Add(var);
             dict_NameVar.Add(varName, var);
 
-            if (device.Ready)
-                var.TrySubscribe();
+            var.TrySubscribe();
+
+            return var;
+        }
+
+        private Var<T> CreateVariable<T>(long IGrp, long IOffs, int Port)
+        {
+            string pseudoName = string.Concat(IGrp.ToString(), ":", IOffs.ToString());
+
+            Var v;
+            if (dict_NameVar.TryGetValue(pseudoName, out v))
+                return (Var<T>)v;
+
+            AdsDevice device = GetDevice(Port);
+
+            Var<T> var = new Var<T>(IGrp, IOffs, device);
+            device.Vars.Add(var);
+            dict_NameVar.Add(pseudoName, var);
+
+            var.TrySubscribe();
 
             return var;
         }
@@ -274,12 +288,7 @@ namespace Ads.Remote
 
         public Var<T> Var<T>(long IGrp, long IOffs, int Port)
         {
-            string pseudoName = string.Concat(IGrp.ToString(), ":", IOffs.ToString());
-
-            return CreateVariable<T>(
-                pseudoName,
-                Port,
-                IGrp, IOffs);
+            return CreateVariable<T>(IGrp, IOffs, Port);
         }
 
         public Var<T> Var<T>(string Variable)
@@ -294,7 +303,10 @@ namespace Ads.Remote
 
         public T Class<T>(T instance = default(T)) where T : new()
         {
-            T o = instance == null ? new T() : instance;
+            T o =
+                instance == null ?
+                new T() :
+                instance;
 
             #region Properties
             PropertyInfo[] properties = o.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
@@ -387,5 +399,5 @@ namespace Ads.Remote
                     cancelTokenSource.Cancel();
             }
         }
-    }
+    } // class
 }

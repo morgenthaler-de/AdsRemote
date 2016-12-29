@@ -60,8 +60,15 @@ namespace Ads.Remote
         }
         #endregion
 
+        /// <summary>
+        /// Trying to unsubscribe from the update events
+        /// </summary>
+        /// <returns>true - if unsubscribed</returns>
         internal override bool TryUnsubscribe()
         {
+            if (!Device.Ready)
+                return false;
+
             try
             {
                 if (NotifyHandle > -1)
@@ -75,8 +82,15 @@ namespace Ads.Remote
             return NotifyHandle == -1;
         }
 
+        /// <summary>
+        /// Trying to subscribe to the update events
+        /// </summary>
+        /// <returns>true - if subscribed</returns>
         internal override bool TrySubscribe()
         {
+            if (!Device.Ready)
+                return false;
+
             try
             {
                 if (IndexGroup == -1 && IndexOffset == -1)
@@ -94,16 +108,14 @@ namespace Ads.Remote
                             IndexGroup, IndexOffset,
                             AdsTransMode.OnChange, 0, 0,
                             this,
-                            typeof(T)
-                            );
+                            typeof(T));
                 else
                     NotifyHandle =
                         Device.AdsClient.AddDeviceNotificationEx(
                             RemoteName,
                             AdsTransMode.OnChange, 0, 0,
                             this,
-                            typeof(T)
-                            );
+                            typeof(T));
             }
             catch
             {

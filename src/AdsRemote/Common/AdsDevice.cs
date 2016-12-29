@@ -10,7 +10,7 @@ namespace Ads.Remote.Common
         internal List<Var> Vars = new List<Var>();
 
         private bool isReady = false;
-        public bool Ready { get { return isReady; } }
+        public bool Ready { get { return isReady; }}
 
         internal AdsDevice(AmsNetId amsNetId, int port)
         {
@@ -23,5 +23,5 @@ namespace Ads.Remote.Common
         {
             isReady = isActive;
         }
-    }
+    } // class
 }
