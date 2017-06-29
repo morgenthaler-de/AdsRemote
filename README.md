@@ -17,9 +17,23 @@ With help of Ads.Remote.PLC.Router you can add new route record into the remote 
 
 Installation
 ------------
-TwinCAT 2 or 3 have to be installed.
 
-Examples
+- TwinCAT 2 or 3 have to be installed.
+- Use NuGet for full automation or download library from the [release](https://github.com/nikvoronin/AdsRemote/releases) section then add project reference.
+
+Demo
+===============
+
+## Broadcast searching
+
+![CxFinder 1.1](https://user-images.githubusercontent.com/11328666/27694544-0857bc9e-5cf5-11e7-9417-97bb868c71dc.png)
+
+## Remote variables
+
+![operator-pi](https://user-images.githubusercontent.com/11328666/27694600-3524346e-5cf5-11e7-9d7b-a4dfc6a1d9d5.png)
+
+
+How To...
 ===============
 
 ## PLC instance
