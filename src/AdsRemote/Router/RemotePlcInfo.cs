@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using TwinCAT.Ads;
 
-namespace Ads.Remote.Router
+namespace AdsRemote.Router
 {
     public class RemotePlcInfo
     {

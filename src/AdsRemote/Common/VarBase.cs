@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Ads.Remote.Common
+namespace AdsRemote.Common
 {
     public abstract class Var : IDisposable, INotifyPropertyChanged
     {

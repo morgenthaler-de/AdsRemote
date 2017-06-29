@@ -286,3 +286,8 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+*.~u
+/demo/OperatorPi/PlcBackend/Runtime01/_Libraries/beckhoff automation gmbh
+/demo/OperatorPi/PlcBackend/_Boot
+/demo/OperatorPi/PlcBackend/TrialLicense.tclrs
+/demo/OperatorPi/PlcBackend/Runtime01/_CompileInfo

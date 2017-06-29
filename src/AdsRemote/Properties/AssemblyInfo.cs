@@ -4,7 +4,7 @@
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nikolai Voronin")]
 [assembly: AssemblyProduct("AdsRemote")]
-[assembly: AssemblyCopyright("Copyright © Nikolai Voronin 2013-2016")]
+[assembly: AssemblyCopyright("Copyright © Nikolai Voronin 2013-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("0.5.*")]

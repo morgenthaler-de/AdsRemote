@@ -1,4 +1,4 @@
-﻿namespace Ads.Remote.Router
+﻿namespace AdsRemote.Router
 {
     internal static class Segment
     {

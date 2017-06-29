@@ -1,6 +1,6 @@
-﻿using Ads.Remote.Router;
+﻿using AdsRemote.Router;
 using System;
-using Ads.Remote.Common;
+using AdsRemote.Common;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using TwinCAT.Ads;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ads.Remote
+namespace AdsRemote
 {
     public class AmsRouter
     {

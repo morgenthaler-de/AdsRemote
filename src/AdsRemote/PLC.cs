@@ -1,4 +1,4 @@
-﻿using Ads.Remote.Common;
+﻿using AdsRemote.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using TwinCAT.Ads;
 
-namespace Ads.Remote
+namespace AdsRemote
 {
     public class PLC : IDisposable, INotifyPropertyChanged
     {

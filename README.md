@@ -1,4 +1,6 @@
-High-level interface for Beckhoff's TwinCAT.Ads API library. Project is not affiliated with Beckhoff.
+High-level interface for Beckhoff's TwinCAT.Ads API library that might save a lot of development time. You don't need network threads or handles. Just declare a C# variable and bind it via the variable attribute to the PLC var. That's all.
+
+> Project is not affiliated with Beckhoff.
 
 Getting started
 ===============

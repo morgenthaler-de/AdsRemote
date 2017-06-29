@@ -1,8 +1,8 @@
-﻿using Ads.Remote.Common;
+﻿using AdsRemote.Common;
 using System;
 using TwinCAT.Ads;
 
-namespace Ads.Remote
+namespace AdsRemote
 {
     public class Var<T> : Var
     {

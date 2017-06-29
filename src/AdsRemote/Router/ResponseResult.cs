@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace Ads.Remote.Router
+namespace AdsRemote.Router
 {
     internal class ResponseResult
     {

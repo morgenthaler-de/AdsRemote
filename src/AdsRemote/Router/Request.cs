@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace Ads.Remote.Router
+namespace AdsRemote.Router
 {
     internal class Request
     {

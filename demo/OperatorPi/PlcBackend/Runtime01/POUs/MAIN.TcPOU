@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+  <POU Name="MAIN" Id="{9b7ef0cc-2fb3-4c0a-860d-f4f781207fb5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	Temp		: LREAL;
+	TempSpeed	: LREAL := 0.1;
+
+	HeatActual	: LREAL;
+	HeatSetpoint: LREAL;
+	CoolActual	: LREAL;
+	CoolSetpoint: LREAL;
+	
+	Counter	: WORD;	
+	incr 	: LREAL;
+	Reset		: BOOL;
+END_VAR
+VAR CONSTANT
+	HEAT_INCR_PERSEC	: LREAL := 10;
+	COOL_INCR_PERSEC	: LREAL := 3;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Counter := Counter + 7;
+
+incr := HEAT_INCR_PERSEC * 1000.0 / UDINT_TO_LREAL(_TaskInfo[1].CycleTime);
+HeatActual := HeatActual + SEL( HeatActual > HeatSetpoint,  incr, -incr);
+
+incr := COOL_INCR_PERSEC * 1000.0 / UDINT_TO_LREAL(_TaskInfo[1].CycleTime);
+CoolActual := CoolActual + SEL( CoolActual > CoolSetpoint,  incr, -incr);
+
+TempSpeed := TempSpeed + 0.000007 * HeatActual - 0.000003 * CoolActual; 
+Temp := Temp + TempSpeed;
+
+IF Temp < 10 THEN
+	Temp := 10;
+	TempSpeed := TempSpeed / 2.0;
+END_IF
+
+
+IF Reset THEN
+	Counter := 0;
+	TempSpeed := 0;
+	Temp := 0;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="15" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="114" Count="1" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="112" Count="1" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

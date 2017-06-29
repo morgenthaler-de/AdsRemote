@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TwinCAT.Ads;
 
-namespace Ads.Remote.Common
+namespace AdsRemote.Common
 {
     public class AdsDevice
     {

@@ -1,4 +1,4 @@
-﻿namespace Ads.Remote.Common
+﻿namespace AdsRemote.Common
 {
     /// <summary>
     /// TwinCAT 3 ADS Ports

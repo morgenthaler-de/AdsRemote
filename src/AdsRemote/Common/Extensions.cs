@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Ads.Remote.Common
+namespace AdsRemote.Common
 {
     public static class Extensions
     {

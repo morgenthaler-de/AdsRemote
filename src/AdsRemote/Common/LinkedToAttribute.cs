@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ads.Remote.Common
+namespace AdsRemote.Common
 {
     public class LinkedToAttribute : Attribute
     {
