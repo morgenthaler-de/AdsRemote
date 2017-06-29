@@ -36,6 +36,8 @@ Demo
 How To...
 ===============
 
+> There is an unstable `develop` branch is selected by default. If you want to use this library in production see stable `master` branch or download from `release` section or use NuGet package `AdsRemote`.
+
 ## PLC instance
 
 First you have to create an instance of PLC object. This one wiil be like a factory that produces linked variables.
