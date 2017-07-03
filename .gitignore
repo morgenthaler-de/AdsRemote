@@ -286,8 +286,12 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+* Beckhoff's TwinCAT projects
 *.~u
-/demo/OperatorPi/PlcBackend/Runtime01/_Libraries/beckhoff automation gmbh
-/demo/OperatorPi/PlcBackend/_Boot
-/demo/OperatorPi/PlcBackend/TrialLicense.tclrs
-/demo/OperatorPi/PlcBackend/Runtime01/_CompileInfo
+_Libraries/
+_Boot/
+_CompileInfo/
+*.tclrs
+*.tpy
+*.tmc

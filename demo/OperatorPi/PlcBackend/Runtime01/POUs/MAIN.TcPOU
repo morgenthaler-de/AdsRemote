@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
-  <POU Name="MAIN" Id="{9b7ef0cc-2fb3-4c0a-860d-f4f781207fb5}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.3">
+  <POU Name="MAIN" Id="{e0cbc1a8-f410-4ed2-af00-8ecda4a17e39}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	Temp		: LREAL;
@@ -18,7 +18,8 @@ END_VAR
 VAR CONSTANT
 	HEAT_INCR_PERSEC	: LREAL := 10;
 	COOL_INCR_PERSEC	: LREAL := 3;
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[Counter := Counter + 7;
 
@@ -44,25 +45,7 @@ IF Reset THEN
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="15" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="97" Count="0" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="100" Count="0" />
-      <LineId Id="102" Count="0" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="105" Count="0" />
-      <LineId Id="114" Count="1" />
-      <LineId Id="117" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="112" Count="1" />
-      <LineId Id="106" Count="0" />
-      <LineId Id="118" Count="0" />
-      <LineId Id="110" Count="0" />
-      <LineId Id="109" Count="0" />
-      <LineId Id="108" Count="0" />
+      <LineId Id="21" Count="20" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>
