@@ -70,6 +70,7 @@ namespace AdsRemote
             byte[] Segment_IPADDRESS_LENGTH = Segment.LOCALHOST_L;
             Segment_IPADDRESS_LENGTH[2] = (byte)Segment_IPADDRESS.Length;
 
+            Request request = new Request(timeout);
 
             request.Add(Segment.HEADER);
             request.Add(Segment.END);
@@ -165,7 +166,7 @@ namespace AdsRemote
             Response response = await request.SendAsync(broadcast);
             ResponseResult rr = await response.ReceiveAsync();
 
-            return device;
+            return (rr == null) ? null : ParseBroadcastSearchResponse(rr);
         }
 
         private static Request CreateSearchRequest(IPAddress localhost, int timeout = 10000)
