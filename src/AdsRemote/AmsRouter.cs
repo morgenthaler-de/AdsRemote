@@ -33,7 +33,7 @@ namespace AdsRemote
         /// <param name="timeout"></param>
         /// <param name="adsUdpPort"></param>
         /// <returns>True - if route added, False - otherwise</returns>
-        public async Task<bool> AddRecordAsync(
+        public static async Task<bool> AddRecordAsync(
             IPAddress localhost,
             IPAddress remoteHost,
             AmsNetId localAmsNetId,
@@ -70,7 +70,6 @@ namespace AdsRemote
             byte[] Segment_IPADDRESS_LENGTH = Segment.LOCALHOST_L;
             Segment_IPADDRESS_LENGTH[2] = (byte)Segment_IPADDRESS.Length;
 
-            Request request = new Request();
 
             request.Add(Segment.HEADER);
             request.Add(Segment.END);
@@ -165,7 +164,6 @@ namespace AdsRemote
 
             Response response = await request.SendAsync(broadcast);
             ResponseResult rr = await response.ReceiveAsync();
-            RemotePlcInfo device = ParseBroadcastSearchResponse(rr);
 
             return device;
         }
