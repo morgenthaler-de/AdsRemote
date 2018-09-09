@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using TwinCAT.Ads;
 
 namespace AdsRemote.Common
@@ -8,9 +9,9 @@ namespace AdsRemote.Common
         public readonly AmsAddress Address;
         public readonly TcAdsClient AdsClient;
         internal List<Var> Vars = new List<Var>();
+        internal SynchronizationContext UiContext;  // TODO to refactor
 
-        private bool isReady = false;
-        public bool Ready { get { return isReady; }}
+        public bool Ready { get; internal set; }
 
         internal AdsDevice(AmsNetId amsNetId, int port)
         {
@@ -21,7 +22,7 @@ namespace AdsRemote.Common
 
         internal void SetActive(bool isActive)
         {
-            isReady = isActive;
+            Ready = isActive;
         }
     } // class
 }

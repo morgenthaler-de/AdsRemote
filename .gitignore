@@ -295,3 +295,4 @@ _CompileInfo/
 *.tclrs
 *.tpy
 *.tmc
+/TODO.txt

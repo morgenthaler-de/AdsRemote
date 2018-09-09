@@ -32,10 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="TwinCAT.Ads, Version=4.1.31.0, Culture=neutral, PublicKeyToken=180016cd49e5e8c3, processorArchitecture=MSIL">
-      <HintPath>..\packages\TwinCAT.Ads.NET.4.1.31\lib\net40\TwinCAT.Ads.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="TwinCAT.Ads, Version=4.2.174.0, Culture=neutral, PublicKeyToken=180016cd49e5e8c3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Beckhoff.TwinCAT.Ads.4.2.174\lib\Net40-full\TwinCAT.Ads.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

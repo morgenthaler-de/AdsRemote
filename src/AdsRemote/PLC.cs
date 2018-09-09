@@ -18,6 +18,7 @@ namespace AdsRemote
 
         Thread pingThread;
         CancellationTokenSource cancelTokenSource;
+        SynchronizationContext _uiContext;  // TODO to refactor
 
         #region Default Runtimes
         public AdsDevice Runtime1
@@ -58,7 +59,7 @@ namespace AdsRemote
         }
         #endregion
 
-        public int Tune_PingSleepInterval = 0;      // How long ping thread sleeps between iterations
+        public int Tune_PingSleepInterval = 1;      // How long ping thread sleeps between iterations
         public int Tune_ReinitInterval = 100;       // Interval after connection but before vars subscription
 
         private int tune_AdsClientTimeout = 1000;   // I/O operations timeout
@@ -107,6 +108,7 @@ namespace AdsRemote
 
         private void PingThread(CancellationToken token, SynchronizationContext uiContext)
         {
+            _uiContext = uiContext;
             List<AdsDevice> devices = new List<AdsDevice>();
             List<AdsDevice> updateList = new List<AdsDevice>();
             while (true)
@@ -237,6 +239,7 @@ namespace AdsRemote
                 device = new AdsDevice(Router.AmsNetId, Port);
                 device.AdsClient.Timeout = tune_AdsClientTimeout;
                 device.AdsClient.AdsNotificationEx += Client_AdsNotificationEx;
+                device.UiContext = _uiContext;
 
                 lock (_locker_dict_PortDevice)
                     dict_PortDevice.Add(Port, device);

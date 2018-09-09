@@ -14,10 +14,14 @@ namespace AdsRemote
             {
                 internalValue = value;
                 try {
-                    Device.AdsClient.WriteAny(IndexGroup, IndexOffset, internalValue);
+                    Device.AdsClient.WriteAny(IndexGroup, IndexOffset, internalValue); // TODO to refactor
                 }
                 catch { }
-                OnValueChanged();
+
+                if (Device.UiContext != null)
+                    Device.UiContext.Send((o) => OnValueChanged(), null);
+                else
+                    OnValueChanged();
             }
         }
 
@@ -28,7 +32,10 @@ namespace AdsRemote
         internal override void SetInternalValue(object value)
         {
             internalValue = (T)value;
-            OnValueChanged();
+            if (Device.UiContext != null)
+                Device.UiContext.Send((o) => OnValueChanged(), null);
+            else
+                OnValueChanged();
         }
 
         internal Var(long iGroup, long iOffset, AdsDevice adsDevice)
