@@ -2,11 +2,11 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>AdsRemote</id>
-        <version>0.5.0</version>
+        <version>0.6.0</version>
         <title>AdsRemote</title>
-        <authors>Nikolai Voronin</authors>
-        <licenseUrl>https://github.com/nikvoronin/AdsRemote/blob/master/LICENSE</licenseUrl>
-        <projectUrl>https://github.com/nikvoronin/AdsRemote</projectUrl>
+        <authors>Nikolai Voronin, Christian Morgenthaler</authors>
+        <licenseUrl>https://github.com/morgenthaler-de/AdsRemote/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/morgenthaler-de/AdsRemote</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>High-level interface for Beckhoff's TwinCAT.Ads API library that might save a lot of development time. You don't need of network threads and variable handles anymore. Just declare a C# variable and bind it via the variable attribute to the PLC var. That's all. See examples at GitHub project page.
 		
@@ -14,7 +14,7 @@
 		</description>
         <summary>High-level interface for TwinCAT.Ads API.</summary>
         <releaseNotes />
-        <copyright>Copyright (c) 2013-2017 Nikolai Voronin</copyright>
+        <copyright>Copyright (c) 2013-2021 Nikolai Voronin</copyright>
         <tags>TwinCAT Beckhoff ADS .NET CSharp</tags>
     </metadata>
     <files>
