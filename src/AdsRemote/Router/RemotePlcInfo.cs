@@ -10,7 +10,7 @@ namespace AdsRemote.Router
         public AmsNetId AmsNetId = new AmsNetId("127.0.0.1.1.1");
         public string OsVersion = "";
         public string Comment = "";
-        public AdsVersion TcVersion = new AdsVersion();
+        public AdsVersion TcVersion = new AdsVersion(5,0,327);
         public bool IsRuntime = false;
 
         public string TcVersionString { get { return TcVersion.Version.ToString() + "." + TcVersion.Revision.ToString() + "." + TcVersion.Build.ToString(); }}

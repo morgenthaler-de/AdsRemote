@@ -6,12 +6,12 @@ namespace AdsRemote.Common
     public abstract class Var : IDisposable, INotifyPropertyChanged
     {
         public string Name { get { return RemoteName; } }
-        protected int NotifyHandle = -1;
+        protected uint NotifyHandle = 0;
 
         internal AdsDevice Device;
         internal string RemoteName = null;
-        internal long IndexGroup = -1;
-        internal long IndexOffset = -1;
+        internal uint IndexGroup = 0;
+        internal uint IndexOffset = 0;
 
         abstract internal bool TrySubscribe();
         abstract internal bool TryUnsubscribe();

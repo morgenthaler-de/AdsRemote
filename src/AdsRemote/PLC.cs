@@ -133,10 +133,10 @@ namespace AdsRemote
                         try
                         {
                             Var v = device.Vars[0];
-                            if(v.IndexGroup > -1 && v.IndexOffset > -1)
+                            if(v.IndexGroup > 0 && v.IndexOffset > 0)
                                 device.AdsClient.ReadAny(v.IndexGroup, v.IndexOffset, v.ValueType);
                             else
-                                device.AdsClient.ReadSymbol(v.Name, v.ValueType, !device.Ready);
+                                device.AdsClient.ReadSymbol(v.Name);
 
                             isActive = true;
                         }
@@ -265,7 +265,7 @@ namespace AdsRemote
             return var;
         }
 
-        private Var<T> CreateVariable<T>(long IGrp, long IOffs, int Port)
+        private Var<T> CreateVariable<T>(uint IGrp, uint IOffs, int Port)
         {
             string pseudoName = string.Concat(IGrp.ToString(), ":", IOffs.ToString());
 
@@ -289,7 +289,7 @@ namespace AdsRemote
             return CreateVariable<T>(Variable, Port);
         }
 
-        public Var<T> Var<T>(long IGrp, long IOffs, int Port)
+        public Var<T> Var<T>(uint IGrp, uint IOffs, int Port)
         {
             return CreateVariable<T>(IGrp, IOffs, Port);
         }

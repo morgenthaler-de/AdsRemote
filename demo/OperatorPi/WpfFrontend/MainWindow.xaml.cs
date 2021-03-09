@@ -7,7 +7,7 @@ namespace OperatorPi
 {
     public partial class MainWindow : Window
     {
-        public const string PLC_AMSNETID = "192.168.56.1.1.1";
+        public const string PLC_AMSNETID = "192.168.13.154.1.1";
         ViewModel model;
         PLC plc;
 

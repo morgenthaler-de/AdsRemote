@@ -1,6 +1,7 @@
 ﻿using AdsRemote.Common;
 using System;
 using TwinCAT.Ads;
+using TwinCAT.Ads.TypeSystem;
 
 namespace AdsRemote
 {
@@ -38,7 +39,7 @@ namespace AdsRemote
                 OnValueChanged();
         }
 
-        internal Var(long iGroup, long iOffset, AdsDevice adsDevice)
+        internal Var(uint iGroup, uint iOffset, AdsDevice adsDevice)
         {
             Device = adsDevice;
 
@@ -51,8 +52,8 @@ namespace AdsRemote
         {
             Device = adsDevice;
             RemoteName = name;
-            IndexGroup = -1;
-            IndexOffset = -1;
+            IndexGroup = 0;
+            IndexOffset = 0;
         }
 
         #region Events
@@ -78,15 +79,15 @@ namespace AdsRemote
 
             try
             {
-                if (NotifyHandle > -1)
+                if (NotifyHandle > 0)
                     Device.AdsClient.DeleteDeviceNotification(NotifyHandle);
             }
             catch
             {
-                NotifyHandle = -1;
+                NotifyHandle = 0;
             }
 
-            return NotifyHandle == -1;
+            return NotifyHandle == 0;
         }
 
         /// <summary>
@@ -100,36 +101,36 @@ namespace AdsRemote
 
             try
             {
-                if (IndexGroup == -1 && IndexOffset == -1)
+                if (IndexGroup == 0 && IndexOffset == 0)
                     try
                     {
-                        ITcAdsSymbol sym = Device.AdsClient.ReadSymbolInfo(RemoteName);
+                        IAdsSymbol sym = Device.AdsClient.ReadSymbol(RemoteName);
                         IndexGroup = sym.IndexGroup;
                         IndexOffset = sym.IndexOffset;
                     }
                     catch { }
 
-                if (IndexGroup > -1 && IndexOffset > -1)
+                if (IndexGroup > 0 && IndexOffset > 0)
                     NotifyHandle =
                         Device.AdsClient.AddDeviceNotificationEx(
                             IndexGroup, IndexOffset,
-                            AdsTransMode.OnChange, 0, 0,
+                            NotificationSettings.Default,
                             this,
                             typeof(T));
                 else
                     NotifyHandle =
-                        Device.AdsClient.AddDeviceNotificationEx(
-                            RemoteName,
-                            AdsTransMode.OnChange, 0, 0,
-                            this,
-                            typeof(T));
+                       Device.AdsClient.AddDeviceNotificationEx(
+                           RemoteName,
+                           NotificationSettings.Default,
+                           this,
+                           typeof(T));
             }
             catch
             {
-                NotifyHandle = -1;
+                NotifyHandle = 0;
             }
 
-            return NotifyHandle > -1;
+            return NotifyHandle > 0;
         }
 
         public static implicit operator T(Var<T> var)

@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.10">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.2">
 	<Project ProjectGUID="{84641BA4-5865-4C58-A45C-77D85A4ECB38}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<Plc>
 			<Project GUID="{F2429886-3687-4FCB-BD42-B414659EFDA5}" Name="Runtime01" PrjFilePath="Runtime01\Runtime01.plcproj" TmcFilePath="Runtime01\Runtime01.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e"/>
